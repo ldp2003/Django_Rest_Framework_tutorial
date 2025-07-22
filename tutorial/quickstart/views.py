@@ -48,18 +48,16 @@ class CategoryViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def retrieve(self, request, pk=None):
-        queryset = self.queryset
-        category = next((cat for cat in queryset if cat.id == int(pk)), None)
+        category = Category.objects.get(pk=pk)
         if category is not None:
-            serializer = self.serializer_class(category)
+            serializer = CategorySerializer(category)
             return Response(serializer.data)
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     def update(self, request, pk=None):
-        queryset = self.queryset
-        category = next((cat for cat in queryset if cat.id == int(pk)), None)
+        category = Category.objects.get(pk=pk)
         if category is not None:
-            serializer = self.serializer_class(category, data=request.data)
+            serializer = self.serializer_class(category, data=request.data) # self.serializer_class == CategorySerializer
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
