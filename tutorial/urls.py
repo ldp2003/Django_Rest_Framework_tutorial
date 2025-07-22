@@ -24,6 +24,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'products', views.ProductViewSet) 
+router.register(r'categories', views.CategoryViewSet)
 # router.register(r'generic', views.UserList) #không được
 # router.register(r'hello', views.hello_world, basename='hello_world') functional không phải viewset class nên như này ko đc
 
